@@ -18,7 +18,7 @@ validateCLIarguments(shift, input, output, action);
 pipeline(
   input ? fs.createReadStream(input) : process.stdin,
   new ConvertibleTransform(action, shift),
-  output ? fs.createWriteStream(output) : process.stdout,
+  output ? fs.createWriteStream(output, { flags: 'a' }) : process.stdout,
   (err) => {
     if (err) {
       console.error('Pipeline failed.', err);
